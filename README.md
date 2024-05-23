@@ -3,7 +3,7 @@
   
 LCARS is based on the idea from the TV show Star Trek - Next Generation. Those panels you see on the bridge of the enterprise are known as LCARS displays. Others have attempted to make this, but they made a shell over windows or Linux. Mine is *FROM SCRATCH*, thus not using a linux kernel or anything related to MS Windows.  
   
-*NOTE : I make NO MONEY on this project. YES, I'm talking to you CBS ! So you can't sue me or force a take down !*  
+*NOTE 1*: I make NO MONEY on this project. YES, I'm talking to you CBS ! So you can't sue me or force a take down !  
   
   
 # BIG THANK YOU TO THE FOLLOWING PEOPLE WHO HELPED ME TO MAKE THIS OS POSSIBLE
@@ -25,10 +25,12 @@ https://www.osforensics.com/tools/mount-disk-images.html
 *QEMU*  
 https://www.qemu.org/  
   
-*NOTE 1* : All three of the above programs are in my windows path. You can do a search on how to do that.  
+*NOTE 2* : All three of the above programs are in my windows path. You can do a search on how to do that.  
   
-*NOTE 2* : Do to the folks who like to cause problems for other youtubers, I am showing my OFFICIAL youtube channel here. Do NOT trust the scammers who pretend to be me !  
+*NOTE 3* : Do to the folks who like to cause problems for other youtubers, I am showing my OFFICIAL youtube channel here. Do NOT trust the scammers who pretend to be me !  
 https://www.youtube.com/@ThatOSDev/videos  
+  
+*NOTE 4* : Although this is an LCARS Operating System, there will be a simplistic Windows-Like GUI as well. Flat colors for the windows, nothing fancy. This can be improved over time. But this is mainly for those who do not like the LCARS interface.  
   
   
 # ** IMPLEMENTED EFI **  
