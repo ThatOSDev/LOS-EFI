@@ -41,3 +41,21 @@ void itoa(uint64_t n, uint64_t* buffer, uint32_t basenumber)
 	}
 }
 
+void* memcpy(void* destination, const void* source, size_t num)
+{
+    for (size_t i = 0; i < num; i++)
+        ((uint8_t*) destination)[i] = ((uint8_t*) source)[i];
+    return destination;
+}
+
+// GCC Version
+void *memset (void *ptr, int value, size_t num)
+{
+  unsigned char *localPtr = (unsigned char*)ptr;
+  while (num-- > 0)
+    *localPtr++ = value;
+
+  return ptr;
+}
+
+

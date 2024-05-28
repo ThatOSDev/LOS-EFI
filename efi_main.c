@@ -19,13 +19,13 @@ EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *system)
 	HitAnyKey();
 	
     uint64_t ENTRY_POINT = 0;
-	void* OSBuffer = readFile(u"los-efi\\loader.bin", &ENTRY_POINT);
-    uint8_t* OSloader = (uint8_t*)OSBuffer;
+	biStruct.LoaderBaseAddress = readFile(u"los-efi\\loader.bin", &ENTRY_POINT);
+    uint8_t* OSloader = (uint8_t*)biStruct.LoaderBaseAddress;
 
-	if(OSBuffer == NULL)
+	if(biStruct.LoaderBaseAddress == NULL)
 	{
 		setTextColor(EFI_RED);
-		wprintf(u"ERROR : OSBuffer is NULL !\r\n");
+		wprintf(u"ERROR : biStruct.LoaderBaseAddress is NULL !\r\n");
 		setTextColor(EFI_GREEN);
 	}
 	
@@ -50,7 +50,7 @@ EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *system)
 		}
 		configTable++;
 	}
-
+	
     // Memory Map
     uint64_t                MemoryMapSize = 0;
     EFI_MEMORY_DESCRIPTOR  *MemoryMap = NULL;

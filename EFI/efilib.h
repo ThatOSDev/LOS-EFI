@@ -35,6 +35,8 @@ typedef struct BLOCKINFO
     uint32_t               ScreenWidth;
     uint32_t               ScreenHeight;
     uint32_t               PixelsPerScanLine;
+	void*                  LoaderBaseAddress;
+	uint64_t*              LoaderSize;
 	EFI_MEMORY_DESCRIPTOR* MMap;
 	uint64_t               MMapSize;
 	uint64_t               MMapDescriptorSize;
@@ -157,7 +159,7 @@ void wprintf(char16_t* txt, ...)
 			i++;
 			switch(txt[i])
 			{
-                case u'c': {
+                case 'c': {
                     charStr[0] = (char16_t)va_arg(args, int);
                     SystemTable->ConOut->OutputString(SystemTable->ConOut, charStr);
 					break;
@@ -174,7 +176,7 @@ void wprintf(char16_t* txt, ...)
 					printIntDigits(number);
 					break;
 				}
-                case u'b':
+                case 'b':
 				{
 					uint64_t bin = va_arg(args, uint64_t);
 					printUInt64Digits(bin, 2);
@@ -341,13 +343,13 @@ void* readFile(uint16_t* FileName, uint64_t* entry)
 	void* OS_Buffer = NULL;
     EFI_FILE_PROTOCOL* m_FileHandle = openFile(FileName);
 
-	uint64_t FileSize = 0;
+	biStruct.LoaderSize = 0;
 	m_FileHandle->SetPosition(m_FileHandle, 0xFFFFFFFFFFFFFFFFULL);
-	m_FileHandle->GetPosition(m_FileHandle, &FileSize);
+	m_FileHandle->GetPosition(m_FileHandle, biStruct.LoaderSize);
 	m_FileHandle->SetPosition(m_FileHandle, 0);
-	SystemTable->BootServices->AllocatePool(EfiLoaderData, FileSize, (void**)&OS_Buffer);
-	m_FileHandle->Read(m_FileHandle, &FileSize, OS_Buffer);
-
+	SystemTable->BootServices->AllocatePool(EfiLoaderData, *biStruct.LoaderSize, (void**)&OS_Buffer);
+	m_FileHandle->Read(m_FileHandle, biStruct.LoaderSize, OS_Buffer);
+	
 	if(entry != NULL)
 	{
 		uint8_t* OSloader = (uint8_t*)OS_Buffer;
